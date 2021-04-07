@@ -19,11 +19,9 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-mixin {
-    add sourceSets.main, "prp.refmap.json"
-}
 
-version = '1.0'
+
+version = '1.0.1'
 group = 'gkappa.prp' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'prp'
 

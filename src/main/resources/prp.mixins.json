@@ -2,7 +2,6 @@
 	"required": true,
 	"package": "gkappa.prp.mixin",
 	"compatibilityLevel": "JAVA_8",
-	"refmap": "prp.refmap.json",
 	"client": [
 		"MixinBookContents"
 	],
