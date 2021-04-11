@@ -61,6 +61,6 @@ Need to work with existing /data/ books. Will try to load from assets first. Sup
     modId="patchouli"
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.16.4-40,)"
+    versionRange="[1.16-37,)"
     ordering="NONE"
     side="BOTH"
