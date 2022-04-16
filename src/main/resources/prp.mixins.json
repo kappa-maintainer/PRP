@@ -2,10 +2,10 @@
 	"required": true,
 	"package": "gkappa.prp.mixin",
 	"compatibilityLevel": "JAVA_8",
-	"client": [
-		"MixinBookContents"
-	],
 	"target": "@env(DEFAULT)",
 	"setSourceFile": true,
-	"minVersion": "0.8"
+	"minVersion": "0.8",
+	"mixins": [
+		"MixinBookContentClasspathLoader"
+	]
 }
