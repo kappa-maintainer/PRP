@@ -1,9 +1,7 @@
 package gkappa.prp.mixin;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Stopwatch;
 import com.google.gson.JsonElement;
-import gkappa.prp.PRP;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -32,7 +30,7 @@ public class MixinBookContentClasspathLoader {
 	@Inject(at = @At("HEAD"), method = "findFiles")
 	private void findFiles(Book book, String dir, List<ResourceLocation> list, CallbackInfo ci) {
 		String prefix = String.format("%s/%s/%s/%s", BookRegistry.BOOKS_LOCATION, book.id.getPath(), BookContentsBuilder.DEFAULT_LANG, dir);
-		Collection<ResourceLocation> files = Minecraft.getInstance().getResourceManager().listResources(prefix, p -> p.endsWith(".json"));
+		Collection<ResourceLocation> files = Minecraft.getInstance().getResourceManager().listResources(prefix, p -> p.getPath().endsWith(".json")).keySet();
 
 		files.stream()
 				.distinct()
@@ -55,14 +53,15 @@ public class MixinBookContentClasspathLoader {
 	}
 
 	@Inject(at = @At("HEAD"), method = "loadJson", cancellable = true, remap = false)
-	private void loadJson(Book book, ResourceLocation resloc, @Nullable ResourceLocation fallback, CallbackInfoReturnable<JsonElement> callback) {
-		PRP.LOGGER.debug("Loading {}", resloc);
+	private void loadJson(Book book, ResourceLocation file, @Nullable ResourceLocation fallback, CallbackInfoReturnable<JsonElement> callback) {
+		PatchouliAPI.LOGGER.debug("Loading {}", file);
 		ResourceManager manager = Minecraft.getInstance().getResourceManager();
 		try {
-			if (manager.hasResource(resloc)) {
-				callback.setReturnValue(BookContentLoader.streamToJson(manager.getResource(resloc).getInputStream()));
-			} else if (fallback != null && manager.hasResource(fallback)) {
-				callback.setReturnValue(BookContentLoader.streamToJson(manager.getResource(fallback).getInputStream()));
+			var resource = manager.getResource(file);
+			if (resource.isPresent()) {
+				callback.setReturnValue(BookContentLoader.streamToJson(resource.get().open()));
+			} else if (fallback != null && (resource = manager.getResource(fallback)).isPresent()) {
+				callback.setReturnValue(BookContentLoader.streamToJson(resource.get().open()));
 			}
 		} catch (IOException ex) {
 			throw new UncheckedIOException(ex);

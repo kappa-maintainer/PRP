@@ -6,7 +6,7 @@
 # The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[40,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+loaderVersion="[43,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 # The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
 license="CC BY-NC-SA 3.0"
@@ -35,7 +35,7 @@ authors="kappa-maintainer" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 Make patchouli books can be override by resource packs. Not include book.json.
-Need to work with existing /data/ books. Will try to load from assets first. Support localization.
+Need to work with existing /data/ books. Will try to load from assets first. Supports localization.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.prp]] #optional
@@ -44,7 +44,7 @@ Need to work with existing /data/ books. Will try to load from assets first. Sup
     # Does this dependency have to exist - if not, ordering below must be specified
     mandatory=true #mandatory
     # The version range of the dependency
-    versionRange="[40,)" #mandatory
+    versionRange="[43,)" #mandatory
     # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
@@ -54,13 +54,13 @@ Need to work with existing /data/ books. Will try to load from assets first. Sup
     modId="minecraft"
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.18.2,)"
+    versionRange="[1.19.2,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.prp]]
     modId="patchouli"
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.18.2-67,)"
+    versionRange="[1.19.2-77,)"
     ordering="NONE"
     side="BOTH"
